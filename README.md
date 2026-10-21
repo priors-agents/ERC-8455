@@ -12,9 +12,9 @@ the directory, or attaches a creator's identity, only with that creator's author
 (EIP-712, or ERC-1271 for a contract account). Nothing declared can change.
 
 **Status: draft, not submitted.** The text is in
-[`ERCS/erc-draft_launch_declarations.md`](ERCS/erc-draft_launch_declarations.md). Its `eip: 99906` is a placeholder:
-the ERC editors assign the real number when the pull request is opened on ethereum/ERCs. Discussion will open on
-Ethereum Magicians first.
+[`ERCS/erc-draft_launch_declarations.md`](ERCS/erc-draft_launch_declarations.md). Its `eip: 99906` is a placeholder: the
+ERC editors assign the real number when the pull request is opened on ethereum/ERCs. Discussion: [Ethereum
+Magicians](https://ethereum-magicians.org/t/erc-tba-launch-declarations-an-extension-of-erc-8376/30038).
 
 ## Why
 

@@ -3,7 +3,7 @@ eip: 99906
 title: Launch Declarations
 description: Typed facts a launchpad declares for a token launch, such as the creator's identity and liquidity locks, keyed to ERC-8376 launch ids
 author: Priors contributors (@priors-agents)
-discussions-to: https://ethereum-magicians.org/t/erc-launch-declarations/0
+discussions-to: https://ethereum-magicians.org/t/erc-tba-launch-declarations-an-extension-of-erc-8376/30038
 status: Draft
 type: Standards Track
 category: ERC
