@@ -11,9 +11,9 @@ that declares it, so two venues never collide and nobody can squat another venue
 the directory, or attaches a creator's identity, only with that creator's authorization: the creator calls, or signs
 (EIP-712, or ERC-1271 for a contract account). Nothing declared can change.
 
-**Status: draft, not submitted.** The text is in
-[`ERCS/erc-draft_launch_declarations.md`](ERCS/erc-draft_launch_declarations.md). Its `eip: 99906` is a placeholder: the
-ERC editors assign the real number when the pull request is opened on ethereum/ERCs. Discussion: [Ethereum
+**Status: draft, submitted as [ethereum/ERCs#2106](https://github.com/ethereum/ERCs/pull/2106).** The text is in
+[`ERCS/erc-draft_launch_declarations.md`](ERCS/erc-draft_launch_declarations.md). Its `eip: 99906` is a placeholder
+until the ERC editors assign a number. Discussion: [Ethereum
 Magicians](https://ethereum-magicians.org/t/erc-tba-launch-declarations-an-extension-of-erc-8376/30038).
 
 ## Why
