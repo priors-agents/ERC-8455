@@ -1,4 +1,4 @@
-# Launch Declarations (draft ERC)
+# ERC-8462: Token Launch Declarations (draft)
 
 The facts a launchpad declares when it launches a token, attached to the launches that ERC-8376 (Token Launch Abuse
 Detection and Remediation) already lists: the creator and its ERC-8004 identity, the supply allocated outside the sale
@@ -12,9 +12,8 @@ the directory, or attaches a creator's identity, only with that creator's author
 (EIP-712, or ERC-1271 for a contract account). Nothing declared can change.
 
 **Status: draft, submitted as [ethereum/ERCs#2106](https://github.com/ethereum/ERCs/pull/2106).** The text is in
-[`ERCS/erc-draft_launch_declarations.md`](ERCS/erc-draft_launch_declarations.md). Its `eip: 99906` is a placeholder
-until the ERC editors assign a number. Discussion: [Ethereum
-Magicians](https://ethereum-magicians.org/t/erc-tba-launch-declarations-an-extension-of-erc-8376/30038).
+[`ERCS/erc-8462.md`](ERCS/erc-8462.md). The editors assigned it ERC-8462 on 2026-10-27. Discussion: [Ethereum
+Magicians](https://ethereum-magicians.org/t/erc-8462-launch-declarations/30038).
 
 ## Why
 
@@ -36,7 +35,7 @@ contract, the other the launch.
 
 | Path | What |
 |---|---|
-| `ERCS/erc-draft_launch_declarations.md` | The ERC text, in the ethereum/ERCs template |
+| `ERCS/erc-8462.md` | The ERC text, in the ethereum/ERCs template |
 | `src/ILaunchDeclarations.sol` | The interface |
 | `src/ILaunchDirectory.sol` | ERC-8376's directory interface, which the reference reads |
 | `src/LaunchDeclarations.sol` | A reference declarations contract (not audited) |
