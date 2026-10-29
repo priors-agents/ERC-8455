@@ -672,9 +672,14 @@ contract LaunchDeclarationsTest is Test {
         emit ILaunchDeclarations.LiquidityDeclared(id, LOCKS, 8, lender, USDG, 1_000e6, due);
         decl.declareLiquidity(id, LOCKS, 8, lender, USDG, 1_000e6, due);
         decl.declareLiquidity(id, LOCKS, 9, lender, address(0), 1 ether, 0); // native currency, no due date
+        decl.declareLiquidity(id, address(0), 0, lender, USDG, 500e6, due); // financed, and in no lock
 
-        vm.expectRevert(LaunchDeclarations.ZeroLiquidityLocks.selector);
+        vm.expectRevert(LaunchDeclarations.NoLockNorLender.selector);
+        decl.declareLiquidity(id, address(0), 0, address(0), address(0), 0, 0);
+        vm.expectRevert(LaunchDeclarations.NoLockNorLender.selector);
         decl.declareLiquidity(id, address(0), 1, address(0), address(0), 0, 0);
+        vm.expectRevert(LaunchDeclarations.LockIdWithoutLocks.selector);
+        decl.declareLiquidity(id, address(0), 1, lender, USDG, 500e6, due);
         vm.expectRevert(LaunchDeclarations.FinancingWithoutLender.selector);
         decl.declareLiquidity(id, LOCKS, 1, address(0), USDG, 0, 0);
         vm.expectRevert(LaunchDeclarations.FinancingWithoutLender.selector);
@@ -686,7 +691,7 @@ contract LaunchDeclarationsTest is Test {
         vm.stopPrank();
 
         ILaunchDeclarations.Liquidity[] memory l = decl.liquidityOf(id, 0, 10);
-        assertEq(l.length, 3);
+        assertEq(l.length, 4);
         assertEq(l[0].liquidityLocks, LOCKS);
         assertEq(l[0].lockId, 7);
         assertEq(l[0].lender, address(0));
@@ -698,6 +703,11 @@ contract LaunchDeclarationsTest is Test {
         assertEq(l[1].dueAt, due);
         assertEq(l[1].declaredAt, block.timestamp);
         assertEq(l[2].asset, address(0));
+        assertEq(l[3].liquidityLocks, address(0));
+        assertEq(l[3].lockId, 0);
+        assertEq(l[3].lender, lender);
+        assertEq(l[3].financed, 500e6);
+        assertEq(l[3].dueAt, due);
     }
 
     function test_feeRecipient_recorded_andRejectsZero() public {
@@ -731,7 +741,7 @@ contract LaunchDeclarationsTest is Test {
         vm.warp(t0 + 3 days); // liquidity added at graduation, after launch
         vm.startPrank(venue);
         decl.declareLiquidity(id, LOCKS, 1, address(0), address(0), 0, 0);
-        decl.declareAllocation(id, other, 12, 0, 0); // a correction: the right amount, beside the wrong one
+        decl.declareAllocation(id, other, 12, 0, 0); // the rest of what `other` got, which adds to the first 10
         vm.expectRevert(LaunchDeclarations.AlreadyDeclared.selector);
         decl.declareListedCreator(id, address(0), 0, 0, "");
         vm.stopPrank();

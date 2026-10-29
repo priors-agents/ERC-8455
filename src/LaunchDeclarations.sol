@@ -63,7 +63,8 @@ contract LaunchDeclarations is ILaunchDeclarations, IERC165 {
     error ZeroHolder();
     error ZeroAmount();
     error VestingEndsBeforeStart();
-    error ZeroLiquidityLocks();
+    error NoLockNorLender();
+    error LockIdWithoutLocks();
     error FinancingWithoutLender();
     error ZeroFinanced();
     error ZeroFeeRights();
@@ -266,7 +267,11 @@ contract LaunchDeclarations is ILaunchDeclarations, IERC165 {
         uint64 dueAt
     ) external {
         _onlyVenue(declarationId);
-        if (liquidityLocks == address(0)) revert ZeroLiquidityLocks();
+        // A fact names a lock, a lender, or both: liquidity in no lock is declared only for its financing.
+        if (liquidityLocks == address(0)) {
+            if (lender == address(0)) revert NoLockNorLender();
+            if (lockId != 0) revert LockIdWithoutLocks();
+        }
         if (lender == address(0)) {
             if (asset != address(0) || financed != 0 || dueAt != 0) revert FinancingWithoutLender();
         } else if (financed == 0) {

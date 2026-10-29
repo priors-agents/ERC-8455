@@ -34,8 +34,8 @@ interface ILaunchDeclarations {
     }
 
     struct Liquidity {
-        address liquidityLocks; // a contract implementing the Liquidity Locks draft
-        uint256 lockId;
+        address liquidityLocks; // a contract implementing the Liquidity Locks draft, or zero for liquidity in no lock
+        uint256 lockId; // zero when `liquidityLocks` is zero
         address lender; // zero when the liquidity was not financed
         address asset; // what the lender lent; the zero address for the native currency
         uint256 financed;
@@ -101,11 +101,13 @@ interface ILaunchDeclarations {
     /// @notice The nonce of the next venue-scoped declaration `venue` opens for `token` and `creator`.
     function venueNonce(address venue, address token, address creator) external view returns (uint256);
 
-    /// @notice Declares supply allocated outside the sale. The declaration's venue only.
+    /// @notice Declares supply allocated outside the sale. A holder's allocations add up, so a cliff or a stepped
+    ///         schedule is declared as several. The declaration's venue only.
     function declareAllocation(bytes32 declarationId, address holder, uint256 amount, uint64 vestStart, uint64 vestEnd)
         external;
 
-    /// @notice Declares the lock that holds the launch's liquidity, and who financed it. The declaration's venue only.
+    /// @notice Declares the lock that holds the launch's liquidity, or a part of it, and who financed it. Liquidity in
+    ///         no lock is declared only when financed. The declaration's venue only.
     function declareLiquidity(
         bytes32 declarationId,
         address liquidityLocks,

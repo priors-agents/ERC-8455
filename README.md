@@ -57,7 +57,8 @@ CI runs all three on every push (`.github/workflows/ci.yml`).
 ## Related drafts
 
 - Liquidity Locks: one interface for any contract that locks pool liquidity
-  (github.com/priors-agents/erc-liquidity-locks). A declared liquidity fact names a lock by its contract and id there.
+  (github.com/priors-agents/erc-liquidity-locks). A declared liquidity fact names a lock by its contract and id there, unless it declares
+  the financing of liquidity in no lock.
 - Creator Fee Rights: a launched token's creator fee stream, its history, and a recipient only the recipient can change
   (github.com/priors-agents/erc-creator-fee-rights). A declared fee recipient names the contract that accounts the fees.
 - Agent Default Registry: lender-reported loan defaults of agent identities, countable on chain against trusted
